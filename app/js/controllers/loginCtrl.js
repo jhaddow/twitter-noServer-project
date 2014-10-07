@@ -1,13 +1,16 @@
 var app = angular.module('twitterListViewer')
 
-app.controller('loginCtrl', function($scope, $firebase){
+app.controller('loginCtrl', function($scope, $firebase, $location, authService){
 
-	var ref = new Firebase('https://twitter-list-viewer.firebaseio.com/');
-	
-	ref.authWithOAuthPopup("twitter", function(error, authData) { 
+	$scope.login = function() {
+		
+		authService.login()
+		.then(function(authData){
 
-		console.log("error: ", error, "authData", authData);
-
-	 });
+			if(authData){
+				console.log(authData);
+			}
+		});
+	}
 
 })
