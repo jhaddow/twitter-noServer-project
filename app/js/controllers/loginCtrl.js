@@ -6,9 +6,9 @@ app.controller('loginCtrl', function($scope, $firebase, $location, authService){
 		
 		authService.login()
 		.then(function(authData){
-
+			
 			if(authData){
-				console.log(authData);
+				$location.path('/twitter-lists');
 			}
 		});
 	}
