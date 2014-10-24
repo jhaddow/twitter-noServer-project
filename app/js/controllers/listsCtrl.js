@@ -14,10 +14,5 @@ app.controller('listsCtrl', function($scope, $firebase, $location, authService, 
 	$scope.getLists = function() {
 		listsService.getLists();
 	}
-
-	$scope.getHashKeys = function() {
-		alert('hello');
-		listsService.getLists();
-	}
 	
 });

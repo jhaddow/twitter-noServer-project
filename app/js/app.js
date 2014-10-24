@@ -1,4 +1,4 @@
-var app = angular.module('twitterListViewer', ['ngRoute', 'firebase']);
+var app = angular.module('twitterListViewer', ['ngRoute', 'firebase', 'ngResource']);
 
 app.config(function($routeProvider){
 	$routeProvider.when('/login', {

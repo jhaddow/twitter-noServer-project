@@ -45,11 +45,8 @@ app.service('headersGenerator', function(authService, $q) {
                 }
 
                 arr = Object.keys(newObj);
-                arr.sort(function(a, b) {
-                    if (a > b) return -1;
-                    if (b > a) return 1;
-                    return 0;
-                });
+                arr.sort();
+                
 
                 var ParamStr = "";
 
@@ -63,10 +60,12 @@ app.service('headersGenerator', function(authService, $q) {
                 return ParamStr;
             };
             paramStr = createParamStr(OAUTH, params);
+            console.log(paramStr);
             var signatureBase = method.toUpperCase() + '&' + percentEncode(baseURL) + '&' + percentEncode(paramStr);
+            console.log(signatureBase);
             var signingKey = percentEncode(consumerSecret) + "&" + percentEncode(tokenSecret);
-            var hash = CryptoJS.HmacSHA1(signingKey, signatureBase);
-            var result = hash.toString(CryptoJS.enc.Base64);
+            var hash = CryptoJS.HmacSHA1(signatureBase, signingKey);
+            var result = hash.toString(CrytoJS.enc.Base64);
 
             deferred.resolve(result);
 
