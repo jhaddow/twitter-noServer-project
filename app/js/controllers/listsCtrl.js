@@ -1,7 +1,8 @@
 var app = angular.module('twitterListViewer')
 
 
-app.controller('listsCtrl', function($scope, $firebase, $location, authService, listsService){
+app.controller('listsCtrl', function($scope, $firebase, $location, authService, listsService, headersGenerator){
+ 
 
 	$scope.message = "You are logged in";
 
