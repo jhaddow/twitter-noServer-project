@@ -16,15 +16,9 @@ app.config(function($routeProvider){
 
 app.run(function($rootScope, $location, authService){
 	$rootScope.$on('$routeChangeStart', function(event, next, current){
-    	authService.getStatus().
-    		then(function(currentUser){
-    			console.log(currentUser);
-    			if(!currentUser){
-    				$location.path('/login')
-    			} else {
-    				$location.path('/twitter-lists')
-    			}	
-    		});
-    	
+    	var isLoggedIn = authService.getStatus();
+    	if(!isLoggedIn){
+    		$location.path('/login');
+    	}
   });
 });

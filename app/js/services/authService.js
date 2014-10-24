@@ -5,7 +5,7 @@ app.service('authService', function($q, $http, $firebase, $firebaseSimpleLogin, 
 	var firebaseEndpoint = environmentService.getEnv().firebase;
     var ref = new Firebase(firebaseEndpoint);
     var authClient = $firebaseSimpleLogin(ref);
-    
+    var authRef = new Firebase(firebaseEndpoint + "/.info/authenticated");
 	this.login = function() {
 		var deferred = $q.defer();
 		
@@ -21,20 +21,15 @@ app.service('authService', function($q, $http, $firebase, $firebaseSimpleLogin, 
     
     this.logout = function() {
     	var deferred = $q.defer();
-
-    	deferred.resolve(authClient.$logout());
+    	deferred.resolve(authClient.logOut());
     	return deferred.promise;
     }
 
     this.getStatus = function() {
-    	var deferred = $q.defer();
-   		promise = authClient.$getCurrentUser();
-   		
-   		promise.then(function(currentUser){
-   			deferred.resolve(currentUser);
-   		});
-
-   		return deferred.promise;
+   
+    	authRef.on("value", function(status){
+    		return status;
+    	} )
     }
 })
 

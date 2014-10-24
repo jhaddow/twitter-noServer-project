@@ -1,5 +1,6 @@
 var app = angular.module('twitterListViewer');
 
+<<<<<<< HEAD
 app.service('listsService', function($q, $http, $resource, authService, headersGenerator){
 
 	this.getLists = function() {
@@ -22,3 +23,19 @@ app.service('listsService', function($q, $http, $resource, authService, headersG
 	};
 		
 });
+=======
+app.service('listsService', function($q, $http, authService){
+
+	this.getLists = function() {
+
+		console.log(authData.twitter.accessToken);
+		$http({
+			method: 'JSONP',
+			url:'https://api.twitter.com/1.1/statutes/home_timeline.json'
+		}).then(function(data){
+			console.log(data);
+		});
+
+	}
+})
+>>>>>>> parent of 8fd7a6d... I tried to generated headers for REST requests, but it didn't work
